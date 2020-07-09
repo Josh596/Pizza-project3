@@ -26,7 +26,7 @@ body{
     grid-template-columns: 45% 55%;
     grid-template-rows: 100%;
     float: left;
-    height: 15vh;
+    height: 20vh;
     margin-right: 5%;
     margin-bottom: 2%;
 }

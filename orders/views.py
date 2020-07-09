@@ -9,7 +9,6 @@ from .models import *
 def index(request):
     context = {
         'menus' : Menu.objects.all()
-        'items': 
     }
     return render(request, "orders/layout.html", context)
 
