@@ -1,9 +1,29 @@
 document.addEventListener('DOMContentLoaded', () =>{
-    //When a card is clicked upon
+    
+    
+    
+    //registering the modals and constant variables
+    const modal = document.querySelector('.modals');
+    const closeButton = document.querySelector('.close-button')
+
+
+    //For displaying the modals
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
     document.querySelectorAll('.cards').forEach(card =>{
-        //I was about creating the modals, will continue tomorrow...Yawns...
-        card.onclick = 
+        card.onclick = toggleModal
     })
+
+    closeButton.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
 
 
 
