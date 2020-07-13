@@ -1,5 +1,9 @@
 html, body { height: 100%; width: 100%; margin: 0; }
 
+*{
+    font-family: Roboto, sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold';
+}
+
 body{
     background-color: #fff;
 }
@@ -48,7 +52,7 @@ body{
     border-top-right-radius: 10%;
     border-bottom-right-radius: 10%;
     border: 2px solid black;
-    background-color: blue;
+    background-color: lightgray;
 }
 
 /*For customizing sections of the page*/
@@ -87,7 +91,7 @@ body{
     background-color: white;
     width: 80%;
     min-width: 500px;
-    height: 85vh;
+    height: 83vh;
     border-radius: 2px;
 }
 .modals-grid{
@@ -127,6 +131,25 @@ body{
     visibility: visible;
     transform: scale(1.0);
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.item_details{
+    margin-top: 10%;
+    padding: 0 40px 80px;
+}
+.item_details h3{
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin: 0 0 34px;
+}
+
+/*Working on order forms*/
+fieldset{
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
 /*If i ever do media queries... width is 1024 sha ohh*/

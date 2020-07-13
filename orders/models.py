@@ -16,7 +16,7 @@ class Items(models.Model):
 		return f"{self.menu} - {self.name}"
 
 class Add_ons(models.Model):
-	item = models.ForeignKey(Items, on_delete = models.CASCADE)
+	item = models.ForeignKey(Items, on_delete = models.CASCADE, null = True, related_name = 'add_on')
 	name = models.CharField(max_length = 64)
 	price = models.DecimalField(max_digits=3, decimal_places=2)
 
@@ -24,7 +24,7 @@ class Add_ons(models.Model):
 		return f"{self.name} is ${self.price} ({self.item})"
 
 class Toppings(models.Model):
-	menu = models.ForeignKey(Menu, on_delete = models.CASCADE, null = True)
+	menu = models.ForeignKey(Menu, on_delete = models.CASCADE, null = True, related_name = 'topping')
 	name = models.CharField(max_length = 64)
 	
 
