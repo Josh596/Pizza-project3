@@ -82,6 +82,7 @@ body{
     visibility: hidden;
     transform: scale(1.1);
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    z-index: 1;
 }
 .modals-content{
     position: absolute;
@@ -122,6 +123,7 @@ body{
     cursor: pointer;
     border-radius: 0.25rem;
     background-color: lightgray;
+    position: fixed;
 }
 .close-button:hover{
     background-color: darkgray;
@@ -133,23 +135,38 @@ body{
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
-.item_details{
-    margin-top: 10%;
-    padding: 0 40px 80px;
+.item_order{
+    font-size: 16px;
 }
-.item_details h3{
+.item_title{
+    margin-top: 10%;
     font-size: 24px;
     line-height: 32px;
     font-weight: 900;
-    letter-spacing: -2px;
-    margin: 0 0 34px;
+    letter-spacing: -.2px;
+    margin-bottom: 34px;
 }
 
 /*Working on order forms*/
+.order_details{
+    box-sizing: border-box;
+}
 fieldset{
     margin: 0;
     padding: 0;
     border: 0;
+}
+
+.radio_title{
+    font-family: Roboto, sans-serif;
+    text-align: left;
+    line-height: 1.5;
+    font-weight: 700;
+    font-style:bold;
+}
+.required{
+    font-weight: 400;
+    color: var(--red)
 }
 
 /*If i ever do media queries... width is 1024 sha ohh*/
