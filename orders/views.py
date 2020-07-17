@@ -14,15 +14,17 @@ def index(request):
     }
     return render(request, "orders/layout.html", context)
 
-def get_item(request, item_name):
+def get_item(request, item_details):
     #Using ajax requests
     if request.method == 'GET' and request.is_ajax:
-        
-        item_data = Items.objects.get(name = item_name)
+        #Getting the menu the item belongs too
+        #converting item_details to string from json
+        item_details_str = json.loads(item_details)
+        menu_name = Menu.objects.get(name = item_details_str['menu_name'])
+
+        item_data = menu_name.item.get(name = item_details_str['item_name'])
         print(item_data)
 
-        pizza_menu = Menu.objects.get(name = 'Pizza')
-        if item_data.name in pizza_menu
 
         item_price = item_data.price.all()
         print(Item_price)

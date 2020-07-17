@@ -95,7 +95,7 @@
         <!--Item cards for each section-->
         <div class="card">  
         {% for item in menu.item.all %}      
-            <div class="cards" data-item = '{{ item.name }}'>
+            <div class="cards" data-item = '{{ item.name }}' data-menu = '{{ menu.name }}'>
                 <div class="item1 items"><img src="{% static 'orders/slide2.png' %}" alt="Pizza" style="max-width: 100%; height: 100%; max-height: 100%;"></div>
                 <div class="item2 items">{{item.name}}</div>
             </div>
@@ -126,18 +126,34 @@
                             <div class="order_size_radio">
                                 <div class="radio_title">Choose a size</div>
                                 <div class="required">Required - Choose one</div>
-                                <div class="size_radio"></div>
-                            </div>
-                            <!--That is if the menu has toppings-->
-                            <div class="order_select_options">
-
-                            </div>
-
-                            <div class="order_quantity_footer">
-                                <div class="order_quantity">
+                                <div class="size_radio">
                                     
                                 </div>
                             </div>
+                            <!--That is if the menu has toppings-->
+                            <div class="order_select_options">
+                                <label class="select_container">One
+                                    <input type="checkbox" checked="checked">
+                                    <span class="checkmark"></span>
+                                </label>
+                                  
+                                <label class="select_container">Two
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                  
+                                <label class="select_container">Three
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                  
+                                <label class="select_container">Four
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+                        
                         </fieldset>
                     </form>
                 </div>
@@ -145,6 +161,26 @@
 
             <div class="item3">
                 <h1>item3</h1>
+            </div>
+            <div class="item4">
+                <div class="order_quantity_footer">
+                    <div class="order_quantity">
+                        <div class="quantity">
+                            <div class="counter_grid">
+                                <div class="counter1" id="plus">
+                                    <button>+</button>
+                                </div>
+                                <div class="counter2">
+                                    <span><input name="quantity" type= 'number' class="counter_input" value= 1></span>
+                                </div>
+                                <div class="counter3" id="minus">
+                                    <button>-</button>
+                                </div>
+                            </div>
+                            <button>Order now</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

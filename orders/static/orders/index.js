@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     //For displaying the modals
     function toggleModal() {
         modal.classList.toggle("show-modal");
+        document.querySelector('.size_radio').innerHTML = ''
     }
 
    
@@ -20,32 +21,58 @@ document.addEventListener('DOMContentLoaded', () =>{
         }
     }
 
+   
+
     document.querySelectorAll('.cards').forEach(card =>{
     
         card.addEventListener('click', () =>{
             item = card.dataset.item
+            menu_name = card.dataset.menu
             console.log(item)
             //Load toggleModal
             toggleModal();
             //time to send the ajax requests
             let request = new XMLHttpRequest
-            request.open('GET', `/${item}`)
+            const request_data = JSON.stringify({'item_name':item, 'menu_name':menu_name})
+            request.open('GET', request_data)
             
             request.send()
 
             request.onload = () =>{
                 let json_data = request.response
+                console.log(json_data)
                 //Getting data from the ajax request
                 data = JSON.parse(json_data)
                 console.log(data)
                 let price = []
+                let sizes = []
                 for(info in data){
                     if('price' in data[info]['fields']){
                         item_price = data[info]['fields']['price']
                         //
                         price.push(item_price)                    
-                                                        }                    
+                                                        }
+                    if('size' in data[info]['fields']){
+                        item_size = data[info]['fields']['size']
+                        if(item_size == 1){
+                            sizes.push('Small')
+                        }
+                        else{
+                            sizes.push('Large')
+                        }
+                        console.log('Work')
+                    }                    
                                 }
+                    
+                    for(size in sizes){
+                        console.log(sizes[size])
+                        console.log('It is present')
+                        document.querySelector('.size_radio').innerHTML +=  `<label class="radio_container">${sizes[size]}
+                        <input type="radio" name="radio">
+                        <span class="radio_checkmark"></span>
+                      </label>`
+
+                    }                
 
                 console.log(price)
                 small_price = Math.min.apply(null, price)
@@ -54,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                 if(small_price != large_price){
                     console.log(small_price)
                     console.log(large_price)
+                   
                 }
                 else{
                     console.log(small_price)
@@ -61,6 +89,29 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 
             }
+            //The quantity modal for the footer
+            plus = document.querySelector('#plus')
+            minus = document.querySelector('#minus')
+            counter_input = document.querySelector('.counter_input')
+            plus.onclick = () =>{
+                counter_input.value ++
+            }
+             
+            minus.onclick = () =>{
+                if(counter_input.value >0){
+                counter_input.value --
+            }
+            }
+            counter_input.onkeyup = () =>{
+               value = parseInt(counter_input.value, 10)
+                    console.log(typeof value)
+                   
+                
+                if(counter_input.value < 0){
+                    counter_input.value = 0
+                }
+            }
+
             
         })
     })
