@@ -1,4 +1,6 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+
 
 # Create your models here.
 class Menu(models.Model):
@@ -45,6 +47,9 @@ class Item_price(models.Model):
 
 	def __str__(self):
 		return f"{self.item}({self.size}) is ${self.price}"
+
+
+
 
 
 

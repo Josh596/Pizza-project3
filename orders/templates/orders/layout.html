@@ -121,8 +121,9 @@
                     
                         <h3 class = 'item_title'>Item details</h3> 
                     
-                    <form class="order_details" action="" method="">
+                    <form class="order_details" id = 'order_details' action="" method="POST">
                         <fieldset>
+                            {% csrf_token %}
                             <div class="order_size_radio">
                                 <div class="radio_title">Choose a size</div>
                                 <div class="required">Required - Choose one</div>
@@ -132,24 +133,24 @@
                             </div>
                             <!--That is if the menu has toppings-->
                             <div class="order_select_options">
-                                <label class="select_container">One
-                                    <input type="checkbox" checked="checked">
-                                    <span class="checkmark"></span>
+                                <label class="select_container">
+                                    <input type="checkbox">
+                                        four
                                 </label>
                                   
-                                <label class="select_container">Two
+                                <label class="select_container">
                                     <input type="checkbox">
-                                    <span class="checkmark"></span>
+                                        Two
                                 </label>
                                   
-                                <label class="select_container">Three
+                                <label class="select_container">
                                     <input type="checkbox">
-                                    <span class="checkmark"></span>
+                                        Three
                                 </label>
                                   
-                                <label class="select_container">Four
+                                <label class="select_container">
                                     <input type="checkbox">
-                                    <span class="checkmark"></span>
+                                        One
                                 </label>
                             </div>
 
@@ -164,22 +165,20 @@
             </div>
             <div class="item4">
                 <div class="order_quantity_footer">
-                    <div class="order_quantity">
-                        <div class="quantity">
-                            <div class="counter_grid">
-                                <div class="counter1" id="plus">
-                                    <button>+</button>
-                                </div>
-                                <div class="counter2">
-                                    <span><input name="quantity" type= 'number' class="counter_input" value= 1></span>
-                                </div>
-                                <div class="counter3" id="minus">
-                                    <button>-</button>
-                                </div>
+                        <div class="counter_grid">
+                            <div class="counter1" id="plus">
+                                <button class="plus_minus">+</button>
                             </div>
-                            <button>Order now</button>
+                            <div class="counter2">
+                                <span><input name="quantity" class="counter_input" value= 1></span>
+                            </div>
+                            <div class="counter3" id="minus">
+                                <button class="plus_minus">-</button>
+                            </div>
                         </div>
-                    </div>
+                        <div class="order_button_div">
+                            <button class="order_button" form="order_details">Order now</button>
+                        </div>             
                 </div>
             </div>
         </div>

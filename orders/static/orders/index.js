@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             toggleModal();
             //time to send the ajax requests
             let request = new XMLHttpRequest
-            const request_data = JSON.stringify({'item_name':item, 'menu_name':menu_name})
+            const request_data = JSON.stringify({"item_name":item, "menu_name":menu_name})
             request.open('GET', request_data)
             
             request.send()
@@ -67,16 +67,16 @@ document.addEventListener('DOMContentLoaded', () =>{
                     for(size in sizes){
                         console.log(sizes[size])
                         console.log('It is present')
-                        document.querySelector('.size_radio').innerHTML +=  `<label class="radio_container">${sizes[size]}
-                        <input type="radio" name="radio">
-                        <span class="radio_checkmark"></span>
-                      </label>`
+                        document.querySelector('.size_radio').innerHTML +=  `<label class="radio_container"><input type="radio" class = "size" name="radio" value = "${sizes[size]}">${sizes[size]}</label>`
+                       
+                        
+                       
 
                     }                
 
                 console.log(price)
-                small_price = Math.min.apply(null, price)
-                large_price = Math.max.apply(null, price)
+               var small_price = Math.min.apply(null, price)
+               var large_price = Math.max.apply(null, price)
                 //Checking for small and large price
                 if(small_price != large_price){
                     console.log(small_price)
@@ -87,8 +87,24 @@ document.addEventListener('DOMContentLoaded', () =>{
                     console.log(small_price)
                 }
 
-
+                           
+                 //The content of the modal, toppings and co
+            document.querySelector('.item3').innerHTML = `${small_price}+`
+            document.querySelector('.order_button').innerHTML = `${small_price}`
+            document.querySelectorAll('.radio_container').forEach(size =>{
+                //Change total price on click radio
+                size.onclick = () =>{
+                    if(size.innerText == "Small"){
+                    document.querySelector('.order_button').innerHTML = `${small_price}`
+                    }
+                    else{
+                        document.querySelector('.order_button').innerHTML = `${large_price}`
+                    }
+                }
+            })
+//End of request.onload
             }
+           
             //The quantity modal for the footer
             plus = document.querySelector('#plus')
             minus = document.querySelector('#minus')
