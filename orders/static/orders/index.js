@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                 console.log(data)
                 let price = []
                 let sizes = []
+                toppings = []
                 for(info in data){
                     if('price' in data[info]['fields']){
                         item_price = data[info]['fields']['price']
@@ -61,18 +62,28 @@ document.addEventListener('DOMContentLoaded', () =>{
                             sizes.push('Large')
                         }
                         console.log('Work')
-                    }                    
+                    }         
+                    if(data[info]['model'] == 'orders.toppings'){
+                       topping_name = data[info]['fields']['name']
+                       toppings.push(topping_name)
+                        console.log(topping_name)
+                    }           
                                 }
-                    
+                    //iterating through the sizes list and use the values as radio
                     for(size in sizes){
                         console.log(sizes[size])
                         console.log('It is present')
-                        document.querySelector('.size_radio').innerHTML +=  `<label class="radio_container"><input type="radio" class = "size" name="radio" value = "${sizes[size]}">${sizes[size]}</label>`
-                       
-                        
-                       
+                        document.querySelector('.size_radio').innerHTML +=  `<label class="radio_container"><input type="radio" class = "size" name="radio" value = "${sizes[size]}">  ${sizes[size]}</label>`
+             
+                    }  
 
-                    }                
+                    for(topping in toppings){
+                        console.log(toppings[topping])
+                        console.log('toppings work')
+                        document.querySelector('.order_select_options').innerHTML += `<label class="select_container"><input type="checkbox" value = "${toppings[topping]}">  ${toppings[topping]}</label>`
+                    } 
+
+
 
                 console.log(price)
                var small_price = Math.min.apply(null, price)
@@ -91,10 +102,10 @@ document.addEventListener('DOMContentLoaded', () =>{
                  //The content of the modal, toppings and co
             document.querySelector('.item3').innerHTML = `${small_price}+`
             document.querySelector('.order_button').innerHTML = `${small_price}`
-            document.querySelectorAll('.radio_container').forEach(size =>{
+            document.querySelectorAll('size').forEach(size =>{
                 //Change total price on click radio
                 size.onclick = () =>{
-                    if(size.innerText == "Small"){
+                    if(size.innerHTML == "Small"){
                     document.querySelector('.order_button').innerHTML = `${small_price}`
                     }
                     else{

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 from django.db import models
 
 
@@ -49,7 +50,10 @@ class Item_price(models.Model):
 		return f"{self.item}({self.size}) is ${self.price}"
 
 
-
+class Order(models.Model):
+	item = models.ManyToManyField(Items, related_name = 'item')
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='user_orders')
+	price = models.DecimalField(max_digits = 4, decimal_places =2)
 
 
 

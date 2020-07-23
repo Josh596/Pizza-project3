@@ -121,9 +121,10 @@
                     
                         <h3 class = 'item_title'>Item details</h3> 
                     
-                    <form class="order_details" id = 'order_details' action="" method="POST">
+                    <form class="order_details" id = 'order_details' action="{% url 'order' %}" method="POST">
+                       {% csrf_token %}
                         <fieldset>
-                            {% csrf_token %}
+                            
                             <div class="order_size_radio">
                                 <div class="radio_title">Choose a size</div>
                                 <div class="required">Required - Choose one</div>
@@ -133,25 +134,7 @@
                             </div>
                             <!--That is if the menu has toppings-->
                             <div class="order_select_options">
-                                <label class="select_container">
-                                    <input type="checkbox">
-                                        four
-                                </label>
-                                  
-                                <label class="select_container">
-                                    <input type="checkbox">
-                                        Two
-                                </label>
-                                  
-                                <label class="select_container">
-                                    <input type="checkbox">
-                                        Three
-                                </label>
-                                  
-                                <label class="select_container">
-                                    <input type="checkbox">
-                                        One
-                                </label>
+                                
                             </div>
 
                         

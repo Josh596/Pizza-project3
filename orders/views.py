@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse
 from django.core import serializers
@@ -53,6 +53,9 @@ def get_item(request, item_details):
         item_details_str = json.loads(item_details)
         menu_name = Menu.objects.get(name = item_details_str['menu_name'])
 
+        topping = menu_name.topping.all()
+
+
         item_data = menu_name.item.get(name = item_details_str['item_name'])
         print(item_data)
 
@@ -70,7 +73,7 @@ def get_item(request, item_details):
             'add_on': add_on
         }
         print(context)
-        context_json = serializers.serialize("json", [item_data, *item_price, *add_on])
+        context_json = serializers.serialize("json", [item_data, *item_price, *add_on, *topping])
         
 
         
@@ -78,6 +81,11 @@ def get_item(request, item_details):
     else:
         return HttpResponse('unsuccessful')
 
+def order(request):
+    if request.method == 'POST':
+        pass
+    else:
+        return Http404("Page does not exist")
 
 
 
