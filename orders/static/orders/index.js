@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     function toggleModal() {
         modal.classList.toggle("show-modal");
         document.querySelector('.size_radio').innerHTML = ''
+        document.querySelector('.order_select_options').innerHTML = ''
     }
 
    
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             //Load toggleModal
             toggleModal();
             //time to send the ajax requests
+            
             let request = new XMLHttpRequest
             const request_data = JSON.stringify({"item_name":item, "menu_name":menu_name})
             request.open('GET', request_data)
@@ -67,20 +69,32 @@ document.addEventListener('DOMContentLoaded', () =>{
                        topping_name = data[info]['fields']['name']
                        toppings.push(topping_name)
                         console.log(topping_name)
-                    }           
+                    }     
+                    
+                    if('menu' in data[info]['fields']){
+                        menu_id = data[info]['fields']['menu']
+                        document.querySelector('.size_radio').innerHTML += `<input class = 'menu_id' name = 'menu_id' value = ${menu_id} style = 'display:none'>`           
+                    }
+
+                    if('item' in data[info]['fields']){
+                        item_id = data[info]['fields']['item']
+                        document.querySelector('.size_radio').innerHTML += `<input class = 'item_id' name = 'item_id' value = ${item_id} style = 'display:none'>`
+                        
+                    }
                                 }
+                    
                     //iterating through the sizes list and use the values as radio
                     for(size in sizes){
                         console.log(sizes[size])
                         console.log('It is present')
-                        document.querySelector('.size_radio').innerHTML +=  `<label class="radio_container"><input type="radio" class = "size" name="radio" value = "${sizes[size]}">  ${sizes[size]}</label>`
+                        document.querySelector('.size_radio').innerHTML +=  `<label class="radio_container"><input type="radio" class = "size" name="size" value = "${sizes[size]}" checked>  ${sizes[size]}</label>`
              
                     }  
 
                     for(topping in toppings){
                         console.log(toppings[topping])
                         console.log('toppings work')
-                        document.querySelector('.order_select_options').innerHTML += `<label class="select_container"><input type="checkbox" value = "${toppings[topping]}">  ${toppings[topping]}</label>`
+                        document.querySelector('.order_select_options').innerHTML += `<label class="select_container"><input type="checkbox" name = "toppings" value = "${toppings[topping]}">  ${toppings[topping]}</label>`
                     } 
 
 
@@ -105,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             document.querySelectorAll('size').forEach(size =>{
                 //Change total price on click radio
                 size.onclick = () =>{
-                    if(size.innerHTML == "Small"){
+                    if(size.value == "Small"){
                     document.querySelector('.order_button').innerHTML = `${small_price}`
                     }
                     else{
@@ -113,6 +127,8 @@ document.addEventListener('DOMContentLoaded', () =>{
                     }
                 }
             })
+
+
 //End of request.onload
             }
            
@@ -139,6 +155,23 @@ document.addEventListener('DOMContentLoaded', () =>{
                 }
             }
 
+
+            function display() {  
+                var checkRadio = document.querySelector( 
+                    'input[name="size"]:checked'); 
+                  
+                if(checkRadio != null) { 
+                   document.querySelector('.order_button').disabled = false;
+                } 
+                else { 
+                    document.querySelector(".order_button").disabled = true;
+                        
+                } 
+            } 
+            document.querySelector('.order_button').onsubmit = () => {
+                display()
+
+            }
             
         })
     })
