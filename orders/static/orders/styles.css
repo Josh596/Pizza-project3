@@ -16,6 +16,40 @@ body{
     text-align: center;
     min-height: 280px; /* Prevent carousel from being distorted if for some reason image doesn't load */
 }
+
+/*For the item cart*/
+span.badge{
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    right: 5px;
+    font-size: 16px;
+    padding: 0;
+    width: 15px;
+    height: 15px;
+    padding-top: 2px;
+}
+.badge{
+  display: inline-block;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+}
+
+#cart{
+  color: #010101;
+  display: block;
+  padding: 28px 15px;
+  position: relative;
+}
+.fa-shopping-bag{
+  font-size: 36px;
+}
 /*The select_container for displaying food items */
 
 .main{

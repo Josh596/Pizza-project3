@@ -51,9 +51,12 @@ class Item_price(models.Model):
 
 
 class Order(models.Model):
-	item = models.ManyToManyField(Items, related_name = 'item')
+	item = models.ManyToManyField(Item_price, related_name = 'items')
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='user_orders')
 	price = models.DecimalField(max_digits = 4, decimal_places =2)
+
+	def __str__(self):
+		return f"{self.user}- ${self.price}"
 
 
 

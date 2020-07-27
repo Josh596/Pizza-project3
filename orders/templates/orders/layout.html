@@ -11,9 +11,12 @@
 <!--My own css-->
 <link rel="stylesheet" href="{% static 'orders/styles.css' %}">
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+ <!-- Site Icons -->
+ <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+ <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+
 
 </head>
 <body>
@@ -29,32 +32,18 @@
                 </div>
             </div>
         </form>
-
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        
-        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-            
-       
-
-            <div class="navbar-nav">
-                    <a href="#" class="nav-item nav-link">Login</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Messages</a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Inbox</a>
-                        <a href="#" class="dropdown-item">Sent</a>
-                        <a href="#" class="dropdown-item">Drafts</a>
-                    </div>
-                </div>
-            </div>
+      
+        <div class="navbar-nav">
+                <a href="{% url 'user_order' %}" class="nav-item nav-link" id = 'cart'> 
+                    <i class="fa fa-shopping-bag"></i>
+                        <span class="badge">3</span>
+                </a>
+        </div>
 
           
                 
             
-        </div>
+       
     </nav>
     <!--Carousels-->
     <div id="myCarousel" class="carousel slide mt-0" data-ride="carousel">
@@ -128,8 +117,11 @@
                             <div class="order_size_radio">
                                 <div class="radio_title">Choose a size</div>
                                 <div class="required">Required - Choose one</div>
-                                <div class="size_radio">
+                                 <!--An invinsible counter to pass the quantity of items-->
+                                 <input class="counter" style="display: none;" value=1 name = 'quantity'>
                                     
+                                <div class="size_radio">
+                                   
                                 </div>
                             </div>
                             <!--That is if the menu has toppings-->
@@ -153,7 +145,7 @@
                                 <button class="plus_minus">+</button>
                             </div>
                             <div class="counter2">
-                                <span><input name="quantity" class="counter_input" value= 1></span>
+                                <span><input class="counter_input" value= 1></span>
                             </div>
                             <div class="counter3" id="minus">
                                 <button class="plus_minus">-</button>
@@ -173,6 +165,10 @@
     
 <!--My own javascript code-->
 <script src="{% static 'orders/index.js' %}"></script>    
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 </body>
 

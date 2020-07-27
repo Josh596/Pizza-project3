@@ -70,12 +70,12 @@ document.addEventListener('DOMContentLoaded', () =>{
                        toppings.push(topping_name)
                         console.log(topping_name)
                     }     
-                    
+                    // An invinsible input to pass menu_id to server
                     if('menu' in data[info]['fields']){
                         menu_id = data[info]['fields']['menu']
                         document.querySelector('.size_radio').innerHTML += `<input class = 'menu_id' name = 'menu_id' value = ${menu_id} style = 'display:none'>`           
                     }
-
+                    // An invinsible fiedl to pass the item id to server
                     if('item' in data[info]['fields']){
                         item_id = data[info]['fields']['item']
                         document.querySelector('.size_radio').innerHTML += `<input class = 'item_id' name = 'item_id' value = ${item_id} style = 'display:none'>`
@@ -90,12 +90,19 @@ document.addEventListener('DOMContentLoaded', () =>{
                         document.querySelector('.size_radio').innerHTML +=  `<label class="radio_container"><input type="radio" class = "size" name="size" value = "${sizes[size]}" checked>  ${sizes[size]}</label>`
              
                     }  
-
+                    //iterating throigh the toppings list a
                     for(topping in toppings){
                         console.log(toppings[topping])
                         console.log('toppings work')
                         document.querySelector('.order_select_options').innerHTML += `<label class="select_container"><input type="checkbox" name = "toppings" value = "${toppings[topping]}">  ${toppings[topping]}</label>`
                     } 
+
+
+                   
+
+                            
+
+                    
 
 
 
@@ -133,25 +140,33 @@ document.addEventListener('DOMContentLoaded', () =>{
             }
            
             //The quantity modal for the footer
+            counter = document.querySelector('.counter')
             plus = document.querySelector('#plus')
             minus = document.querySelector('#minus')
             counter_input = document.querySelector('.counter_input')
+            
+            //I began to love insible input, so i created another input tag inside the order_form and the counter_input directly affects the counter value
             plus.onclick = () =>{
-                counter_input.value ++
+                counter_input.value ++;
+                counter.value ++
             }
              
             minus.onclick = () =>{
                 if(counter_input.value >0){
-                counter_input.value --
+                counter_input.value --;
+                counter.value --
+
             }
             }
             counter_input.onkeyup = () =>{
                value = parseInt(counter_input.value, 10)
+               counter.value = value
                     console.log(typeof value)
                    
                 
                 if(counter_input.value < 0){
                     counter_input.value = 0
+                    counter.value = 0
                 }
             }
 

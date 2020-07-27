@@ -86,6 +86,8 @@ def order(request):
         toppings = request.POST.getlist('toppings', None)
         item_id = request.POST['item_id']
         menu_id = request.POST['menu_id']
+        quantity = request.POST['quantity']
+
 
         menu = Menu.objects.get(pk = menu_id)
         item_size = Size.objects.get(size = size)
@@ -94,21 +96,50 @@ def order(request):
        
 
         item_price = item.price.get(size = size_id)
-        main_price = item_price.price
-        price = 0
-        for topping in toppings:
-          price += 0.5
         
-       
-        
-        
-        return HttpResponse(main_price)
-      
-    
+        price = item_price.price
+        float_price = float(price)
+        total_price = float_price * float(quantity)
 
+        for topping in toppings:
+         total_price += 0.5
+
+        user = User.objects.get(username = request.session.get('username'))
+        
+        
+        try:
+            order = Order.objects.get(user = user.pk)
+            new_price = float(order.price) + total_price
+            order.price = new_price
+            order.save()
+            order.item.add(item_price)
+        except Order.DoesNotExist:
+            order = Order(user = user, price = total_price)
+            order.save()
+            order.item.add(item_price)
+            
+    
+        
+        return HttpResponseRedirect(reverse(index))
+      
 
     else:
         return Http404("Page does not exist")
+
+def user_order(request):
+    if request.method == 'GET':
+        user = User.objects.get(username = request.session['username'])
+        user_orders = user.user_orders.all()
+    
+
+        context = {
+            'orders':user_orders
+        }
+
+        return render(request,"orders/orders.html", context=context)
+    else:
+        return Http404("What are you doing?")
+
 
 
 
